@@ -12,6 +12,16 @@ import java.awt.event.MouseEvent;
 public class StackHandler implements InteractableObject {
     private Stack<Card> stackOfUnrevealed;
     private Stack<Card> stackOfRevealed;
+    private final static int Anzahl = 52;
+
+    public StackHandler(MainFrame frame){
+        stackOfUnrevealed = new Stack<Card>();
+        stackOfRevealed = new Stack<Card>();
+    }
+
+    public void createCards(){
+
+    }
 
     @Override
     public void keyPressed(int key) {
