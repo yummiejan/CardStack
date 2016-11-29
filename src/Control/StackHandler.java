@@ -94,4 +94,8 @@ public class StackHandler implements InteractableObject {
 
     }
 
+    public void shuffle(){
+
+    }
+
 }
