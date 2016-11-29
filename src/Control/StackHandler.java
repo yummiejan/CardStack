@@ -47,4 +47,13 @@ public class StackHandler implements InteractableObject {
     public void update(double dt) {
 
     }
+
+    public void createStackOfUnrevealed(){
+        for(int v = 0;v<4;v++) {
+            for (int i = 0; i < 12; i++) {
+                //card = new Card(v,i);
+                //stackOfUnrevealed.push(card);
+            }
+        }
+    }
 }
