@@ -11,7 +11,7 @@ public enum Suits {
     private String symbol;
 
     Suits(String symbol){
-
+        this.symbol = symbol;
     }
 
     public String getSymbol(){

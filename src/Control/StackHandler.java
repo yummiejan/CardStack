@@ -4,6 +4,7 @@ import Model.*;
 import View.*;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
 /**
@@ -12,15 +13,15 @@ import java.awt.event.MouseEvent;
 public class StackHandler implements InteractableObject {
     private Stack<Card> stackOfUnrevealed;
     private Stack<Card> stackOfRevealed;
-    private final static int Anzahl = 52;
+    private final static int AMOUNT = Suits.values().length * Value.values().length;
+    private MainFrame frame;
+    private Card card;
 
     public StackHandler(MainFrame frame){
+        this.frame = frame;
         stackOfUnrevealed = new Stack<Card>();
         stackOfRevealed = new Stack<Card>();
-    }
-
-    public void createCards(){
-
+        createStackOfUnrevealed(100,75);
     }
 
     @Override
@@ -30,7 +31,9 @@ public class StackHandler implements InteractableObject {
 
     @Override
     public void keyReleased(int key) {
-
+        if(key == KeyEvent.VK_RIGHT){
+            card.turnCard(400,75);
+        }
     }
 
     @Override
@@ -48,12 +51,20 @@ public class StackHandler implements InteractableObject {
 
     }
 
-    public void createStackOfUnrevealed(){
-        for(int v = 0;v<4;v++) {
-            for (int i = 0; i < 12; i++) {
-                //card = new Card(v,i);
-                //stackOfUnrevealed.push(card);
+    public void createStackOfUnrevealed(double xPos, double yPos){
+        Card[] tempArray = new Card[AMOUNT];
+        for (int i = 0; i <Suits.values().length; i++) {
+            int tempCounter = (tempArray.length/Suits.values().length)*i;
+            for (int j = 0; j < (tempArray.length/Suits.values().length); j++) {
+                Suits suits = Suits.values()[i];
+                Value value = Value.values()[j];
+                tempArray[j+tempCounter]= new Card(xPos,yPos,suits,value);
             }
         }
+        for (Card c: tempArray) {
+            frame.getActiveDrawingPanel().addObject(c);
+            stackOfUnrevealed.push(c);
+        }
+
     }
 }
