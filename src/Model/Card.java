@@ -62,4 +62,14 @@ public class Card implements DrawableObject {
         this.yPos = yPos;
         revealed = !revealed;
     }
+
+    public void turnCardAgain(double xPos, double yPos){
+        this.xPos = xPos;
+        this.yPos = yPos;
+        revealed = true;
+    }
+
+    public String toString(){
+        return suit.getSymbol() + value.getValue();
+    }
 }

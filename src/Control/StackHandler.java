@@ -27,11 +27,21 @@ public class StackHandler implements InteractableObject {
 
     @Override
     public void keyPressed(int key) {
-        if(key == KeyEvent.VK_RIGHT){
-            if(!stackOfUnrevealed.isEmpty()){
+        if (key == KeyEvent.VK_RIGHT) {
+            if (!stackOfUnrevealed.isEmpty()) {
                 stackOfRevealed.push(stackOfUnrevealed.top());
-                stackOfUnrevealed.top().turnCard(xPosR,75);
+                stackOfUnrevealed.top().turnCard(xPosR, 75);
                 stackOfUnrevealed.pop();
+                frame.getActiveDrawingPanel().removeObject(stackOfRevealed.top());
+                frame.getActiveDrawingPanel().addObject(stackOfRevealed.top());
+            }
+        } else if (key == KeyEvent.VK_LEFT) {
+            if (!stackOfRevealed.isEmpty()) {
+                stackOfUnrevealed.push(stackOfRevealed.top());
+                stackOfRevealed.top().turnCard(xPosU, 75);
+                stackOfRevealed.pop();
+                frame.getActiveDrawingPanel().removeObject(stackOfUnrevealed.top());
+                frame.getActiveDrawingPanel().addObject(stackOfUnrevealed.top());
             }
         }
     }
@@ -57,19 +67,31 @@ public class StackHandler implements InteractableObject {
     }
 
     public void createStackOfUnrevealed(double xPos, double yPos){
-        Card[] tempArray = new Card[AMOUNT];
+        Card[] tmpArray = new Card[AMOUNT];
         for (int i = 0; i <Suits.values().length; i++) {
-            int tempCounter = (tempArray.length/Suits.values().length)*i;
-            for (int j = 0; j < (tempArray.length/Suits.values().length); j++) {
+            int tempCounter = (tmpArray.length/Suits.values().length)*i;
+            for (int j = 0; j < (tmpArray.length/Suits.values().length); j++) {
                 Suits suits = Suits.values()[i];
                 Value value = Value.values()[j];
-                tempArray[j+tempCounter]= new Card(xPos,yPos,suits,value);
+                tmpArray[j+tempCounter]= new Card(xPos,yPos,suits,value);
+
             }
         }
-        for (Card c: tempArray) {
+
+        for(int i = 0; i < 4766756; ++i){
+            int r1 = (int)(Math.random() * AMOUNT - 1);
+            int r2 = (int)(Math.random() * AMOUNT - 1);
+            Card card = tmpArray[r1];
+            tmpArray[r1] = tmpArray[r2];
+            tmpArray[r2] = card;
+        }
+
+        for (Card c: tmpArray) {
+            System.out.println(c.toString());
             frame.getActiveDrawingPanel().addObject(c);
             stackOfUnrevealed.push(c);
         }
 
     }
+
 }
