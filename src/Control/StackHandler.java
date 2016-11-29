@@ -13,27 +13,32 @@ import java.awt.event.MouseEvent;
 public class StackHandler implements InteractableObject {
     private Stack<Card> stackOfUnrevealed;
     private Stack<Card> stackOfRevealed;
-    private final static int AMOUNT = Suits.values().length * Value.values().length;
+    private final int AMOUNT = Suits.values().length * Value.values().length;
+    private final double xPosR = 400, xPosU = 100;
     private MainFrame frame;
-    private Card card;
 
     public StackHandler(MainFrame frame){
         this.frame = frame;
         stackOfUnrevealed = new Stack<Card>();
         stackOfRevealed = new Stack<Card>();
         createStackOfUnrevealed(100,75);
+        frame.getActiveDrawingPanel().addObject(this);
     }
 
     @Override
     public void keyPressed(int key) {
-
+        if(key == KeyEvent.VK_RIGHT){
+            if(!stackOfUnrevealed.isEmpty()){
+                stackOfRevealed.push(stackOfUnrevealed.top());
+                stackOfUnrevealed.top().turnCard(xPosR,75);
+                stackOfUnrevealed.pop();
+            }
+        }
     }
 
     @Override
     public void keyReleased(int key) {
-        if(key == KeyEvent.VK_RIGHT){
-            card.turnCard(400,75);
-        }
+
     }
 
     @Override

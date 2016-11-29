@@ -12,5 +12,6 @@ public class MainController {
 
     public MainController(MainFrame frame){
         handler = new StackHandler(frame);
+
     }
 }
