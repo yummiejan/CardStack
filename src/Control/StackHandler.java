@@ -38,7 +38,7 @@ public class StackHandler implements InteractableObject {
         } else if (key == KeyEvent.VK_LEFT) {
             if (!stackOfRevealed.isEmpty()) {
                 stackOfUnrevealed.push(stackOfRevealed.top());
-                stackOfRevealed.top().turnCard(xPosU, 75);
+                stackOfRevealed.top().turnCardAgain(xPosU, 75);
                 stackOfRevealed.pop();
                 frame.getActiveDrawingPanel().removeObject(stackOfUnrevealed.top());
                 frame.getActiveDrawingPanel().addObject(stackOfUnrevealed.top());
@@ -69,7 +69,7 @@ public class StackHandler implements InteractableObject {
     public void createStackOfUnrevealed(double xPos, double yPos){
         Card[] tmpArray = new Card[AMOUNT];
         for (int i = 0; i <Suits.values().length; i++) {
-            int tempCounter = (tmpArray.length/Suits.values().length)*i;
+            int tempCounter = (tmpArray.length/Suits.values().length) * i;
             for (int j = 0; j < (tmpArray.length/Suits.values().length); j++) {
                 Suits suits = Suits.values()[i];
                 Value value = Value.values()[j];
@@ -78,7 +78,7 @@ public class StackHandler implements InteractableObject {
             }
         }
 
-        for(int i = 0; i < 4766756; ++i){
+        for(int i = 0; i < 4766756; i++){
             int r1 = (int)(Math.random() * AMOUNT - 1);
             int r2 = (int)(Math.random() * AMOUNT - 1);
             Card card = tmpArray[r1];

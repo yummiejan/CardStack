@@ -60,13 +60,13 @@ public class Card implements DrawableObject {
     public void turnCard(double xPos, double yPos){
         this.xPos = xPos;
         this.yPos = yPos;
-        revealed = !revealed;
+        revealed = true;
     }
 
     public void turnCardAgain(double xPos, double yPos){
         this.xPos = xPos;
         this.yPos = yPos;
-        revealed = true;
+        revealed = false;
     }
 
     public String toString(){
