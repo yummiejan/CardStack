@@ -44,11 +44,11 @@ public class Card implements DrawableObject {
             g2d.setFont(new Font("TimesRoman", Font.PLAIN, fontSize));
             int widthOfText = g2d.getFontMetrics().stringWidth(value.getValue());
 
-            g2d.drawString(suit.getSymbol(), (int) (xPos), (int) (yPos) + 40);
-            g2d.drawString(suit.getSymbol(), (int) (xPos) + 210, (int) (yPos) + 399);
+            g2d.drawString(suit.getSuit(), (int) (xPos), (int) (yPos) + 40);
+            g2d.drawString(suit.getSuit(), (int) (xPos) + 210, (int) (yPos) + 397);
 
             g2d.drawString(value.getValue(), (int) (xPos + width - widthOfText), (int) (yPos) + 40);
-            g2d.drawString(value.getValue(), (int) (xPos) + 2, (int) (yPos) + 399);
+            g2d.drawString(value.getValue(), (int) (xPos) + 2, (int) (yPos) + 397);
         }
     }
 
@@ -70,6 +70,6 @@ public class Card implements DrawableObject {
     }
 
     public String toString(){
-        return suit.getSymbol() + value.getValue();
+        return suit.getSuit() + value.getValue();
     }
 }

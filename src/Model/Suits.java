@@ -8,13 +8,13 @@ public enum Suits {
     CLUBS("♣"),
     DIAMONDS("♦"),
     HEARTS("♥");
-    private String symbol;
+    private String suit;
 
     Suits(String symbol){
-        this.symbol = symbol;
+        this.suit = symbol;
     }
 
-    public String getSymbol(){
-        return symbol;
+    public String getSuit(){
+        return suit;
     }
 }
