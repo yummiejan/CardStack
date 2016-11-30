@@ -3,6 +3,7 @@ package Control;
 import Model.*;
 import View.*;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -27,23 +28,25 @@ public class StackHandler implements InteractableObject {
 
     @Override
     public void keyPressed(int key) {
-        if (key == KeyEvent.VK_RIGHT) {
-            if (!stackOfUnrevealed.isEmpty()) {
-                stackOfRevealed.push(stackOfUnrevealed.top());
-                stackOfUnrevealed.top().turnCard(xPosR, 75);
-                stackOfUnrevealed.pop();
-                frame.getActiveDrawingPanel().removeObject(stackOfRevealed.top());
-                frame.getActiveDrawingPanel().addObject(stackOfRevealed.top());
+        SwingUtilities.invokeLater(() -> {
+            if (key == KeyEvent.VK_RIGHT) {
+                if (!stackOfUnrevealed.isEmpty()) {
+                    stackOfRevealed.push(stackOfUnrevealed.top());
+                    stackOfUnrevealed.top().turnCard(xPosR, 75);
+                    stackOfUnrevealed.pop();
+                    frame.getActiveDrawingPanel().removeObject(stackOfRevealed.top());
+                    frame.getActiveDrawingPanel().addObject(stackOfRevealed.top());
+                }
+            } else if (key == KeyEvent.VK_LEFT) {
+                if (!stackOfRevealed.isEmpty()) {
+                    stackOfUnrevealed.push(stackOfRevealed.top());
+                    stackOfRevealed.top().turnCardAgain(xPosU, 75);
+                    stackOfRevealed.pop();
+                    frame.getActiveDrawingPanel().removeObject(stackOfUnrevealed.top());
+                    frame.getActiveDrawingPanel().addObject(stackOfUnrevealed.top());
+                }
             }
-        } else if (key == KeyEvent.VK_LEFT) {
-            if (!stackOfRevealed.isEmpty()) {
-                stackOfUnrevealed.push(stackOfRevealed.top());
-                stackOfRevealed.top().turnCardAgain(xPosU, 75);
-                stackOfRevealed.pop();
-                frame.getActiveDrawingPanel().removeObject(stackOfUnrevealed.top());
-                frame.getActiveDrawingPanel().addObject(stackOfUnrevealed.top());
-            }
-        }
+        });
     }
 
     @Override
@@ -79,8 +82,8 @@ public class StackHandler implements InteractableObject {
         }
 
         for(int i = 0; i < 4766756; i++){
-            int r1 = (int)(Math.random() * AMOUNT - 1);
-            int r2 = (int)(Math.random() * AMOUNT - 1);
+            int r1 = (int)(Math.random() * AMOUNT );
+            int r2 = (int)(Math.random() * AMOUNT );
             Card card = tmpArray[r1];
             tmpArray[r1] = tmpArray[r2];
             tmpArray[r2] = card;
